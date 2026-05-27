@@ -146,14 +146,15 @@
 </div>
 
 <div class="container">
+  <center>
+		<div class="content-div"></div>
+		<img class="img-fluid" src="videos/teaser_v1.png" style="margin-bottom: 30px" width="75%" alt=""><br>
+	</center>
 	<!--------------------- abstract --------------------->
 	<center>
 		<h2> Abstract </h2>
 		<div class="content-div"></div>
-		<p style="width:75%; text-align: justify; white-space: normal;"> Large-scale dexterous grasp datasets provide rich priors for hand-object interaction, yet their use has largely been limited to grasp generation and pick-and-place manipulation. In this work, we study whether these priors can enable dexterous articulated tool use, which requires task-oriented functional dexterity. 
-To address this problem, we adopt a hierarchical policy learning framework that combines high-level sub-goal prediction with a low-level goal-conditioned controller. We pretrain the low-level controller on large-scale grasp trajectories and fine-tune on downstream demonstrations.
-Further, we introduce <code>DexCraft</code>, a simulation benchmark with six articulated tool use tasks requiring fine-grained finger coordination.
-Experiments in simulation and the real world show that combining grasp pretraining with hierarchical policy learning improves the performance, suggesting that grasp synthesis datasets can be used as effective pretraining data for long-horizon dexterous manipulation. </p>
+		<p style="width:75%; text-align: justify; white-space: normal;"> Large-scale dexterous grasp datasets encode rich priors over hand-object interaction, but their use has largely been confined to grasp generation and pick-and-place manipulation. We study whether such data can instead support functional dexterity in articulated tool use, where a robot must acquire a tool, maintain contact, and operate its functional moving parts. We adapt a hierarchical imitation learning framework that combines high-level hand sub-goal prediction with a low-level goal-conditioned controller. We construct a 355k-trajectory grasp-pretraining dataset from large-scale dexterous grasp annotations and use it to pretrain the low-level controller. The controller is then fine-tuned on downstream task demonstrations. To evaluate this setting, we introduce <code>DexCraft</code>, a simulation benchmark with six articulated tool-use tasks requiring coordinated finger motion. Across simulation and real-world experiments, our approach outperforms end-to-end diffusion policy baselines and hierarchical policies trained from scratch. In the real world, it improves full-task success by 33.3 percentage points over DP3. These results show that grasp datasets can serve not only as resources for grasp synthesis, but also as scalable pretraining data for contact-rich dexterous manipulation. </p>
 	</center>
 
 	<div class="content-div"></div>
@@ -161,8 +162,8 @@ Experiments in simulation and the real world show that combining grasp pretraini
 	<center>
 		<h2> DexCraft Benchmark </h2>
     <p style="width:75%; text-align: justify; white-space: normal;">
-      We propose the <code>DexCraft</code> benchmark which contains six dexterous manipulation tasks. In each task, the robot hand needs to grasp the articulated tool, lift it to a target pose and perform the function of the tool.
-      We collect 5 demonstrations with human teleoperation and use MimicGen pipeline to augment to 500 demos.
+      We propose the <code>DexCraft</code> benchmark which contains six dexterous manipulation tasks. The robot hand is required to grasp the object, lift it to the target pose, and trigger the object's articulated joint.
+      We collect 5 demonstrations with human teleoperation and use MimicGen pipeline to augment to 100 demos.
     </p>
 	</center>
 	<div class="content-div"></div>
@@ -253,7 +254,7 @@ Experiments in simulation and the real world show that combining grasp pretraini
 		<div class="content-div"></div>
 		<img class="img-fluid" src="res/method.png" style="margin-bottom: 30px" width="75%" alt=""><br>
 
-		<p style="width:75%; text-align: justify; white-space: normal;"> An overview of our approach. We integrate large-scale grasp pretraining with hierarchical policy framework. (a) High-level sub-goal prediction policy takes the current point cloud observation as input, and predicts the positions of hand key points. (b) Low-level policy is conditioned on predicted sub-goal key points and current observation, and predicts action chunks for the controller. We augment Dexonomy dataset into grasp trajectories and pretrain the low-level policy, then we fine-tune it with downstream task data. </p>
+		<p style="width:75%; text-align: justify; white-space: normal;"> An overview of our approach. Our method integrates large-scale grasp pretraining with a hierarchical policy framework. (a) A high-level sub-goal prediction policy takes the current point cloud observation as input and predicts the positions of hand key points. (b) A low-level policy is conditioned on predicted sub-goal key points and current observation and predicts action chunks for the controller. Top: We augment the Dexonomy dataset into grasp trajectories and pretrain the low-level policy, which we fine-tune with data from the downstream task. </p>
 	</center>
 
   <center>
@@ -308,8 +309,79 @@ Experiments in simulation and the real world show that combining grasp pretraini
 	<div class="section-div"></div>
 	<center>
 	<h2> Qualitative Comparison in Simulation Tasks </h2>
-  Coming soon...
 	</center>
+
+  <div style="height: 1em;"></div>
+
+  <center>
+    <h5> DP3 </h5>
+    Unstable grasp due to imprecise hand-object alignment. <br>
+  </center>
+
+  <div style="height: 1em;"></div>
+
+  <div class="video-grid">
+    <div class="video-card">
+      <video playsinline autoplay loop muted controls preload="metadata" src="videos/spraybottle_none_2.mp4" onloadedmetadata="this.playbackRate = 2.0"></video>
+      Failure
+    </div>
+    <div class="video-card">
+      <video playsinline autoplay loop muted controls preload="metadata" src="videos/spraybottle_none_3.mp4" onloadedmetadata="this.playbackRate = 2.0"></video>
+      Failure
+    </div>
+    <div class="video-card">
+      <video playsinline autoplay loop muted controls preload="metadata" src="videos/spraybottle_none_4.mp4" onloadedmetadata="this.playbackRate = 2.0"></video>
+      Failure
+    </div>
+  </div>
+
+  <div style="height: 2em;"></div>
+
+  <center>
+    <h5> Hierarchical Policy from Scratch </h5>
+    Higher success rate than end-to-end policy, but still imperfect grasp in some cases. <br>
+  </center>
+
+  <div style="height: 1em;"></div>
+
+  <div class="video-grid">
+    <div class="video-card">
+      <video playsinline autoplay loop muted controls preload="metadata" src="videos/spraybottle_goal_2.mp4"></video>
+      Success
+    </div>
+    <div class="video-card">
+      <video playsinline autoplay loop muted controls preload="metadata" src="videos/spraybottle_goal_3.mp4"></video>
+      Success
+    </div>
+    <div class="video-card">
+      <video playsinline autoplay loop muted controls preload="metadata" src="videos/spraybottle_goal_4.mp4"></video>
+      Failure
+    </div>
+  </div>
+
+  <div style="height: 2em;"></div>
+
+  <center>
+    <h5> Our Method </h5>
+    Much more robust than baselines. <br>
+  </center>
+
+  <div style="height: 1em;"></div>
+
+  <div class="video-grid">
+    <div class="video-card">
+      <video playsinline autoplay loop muted controls preload="metadata" src="videos/spraybottle_finetune_2.mp4"></video>
+      Success
+    </div>
+    <div class="video-card">
+      <video playsinline autoplay loop muted controls preload="metadata" src="videos/spraybottle_finetune_3.mp4"></video>
+      Success
+    </div>
+    <div class="video-card">
+      <video playsinline autoplay loop muted controls preload="metadata" src="videos/spraybottle_finetune_4.mp4"></video>
+      Success
+    </div>
+  </div>
 	
 
 
