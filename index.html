@@ -163,7 +163,7 @@
 		<h2> DexCraft Benchmark </h2>
     <p style="width:75%; text-align: justify; white-space: normal;">
       We propose the <code>DexCraft</code> benchmark which contains six dexterous manipulation tasks. The robot hand is required to grasp the object, lift it to the target pose, and trigger the object's articulated joint.
-      We collect 5 demonstrations with human teleoperation and use MimicGen pipeline to augment to 100 demos.
+      We collect 5 demonstrations with human teleoperation and use <a href="https://mimicgen.github.io/">MimicGen</a> pipeline to augment to 100 demos.
     </p>
 	</center>
 	<div class="content-div"></div>
@@ -254,7 +254,7 @@
 		<div class="content-div"></div>
 		<img class="img-fluid" src="res/method.png" style="margin-bottom: 30px" width="75%" alt=""><br>
 
-		<p style="width:75%; text-align: justify; white-space: normal;"> An overview of our approach. Our method integrates large-scale grasp pretraining with a hierarchical policy framework. (a) A high-level sub-goal prediction policy takes the current point cloud observation as input and predicts the positions of hand key points. (b) A low-level policy is conditioned on predicted sub-goal key points and current observation and predicts action chunks for the controller. Top: We augment the Dexonomy dataset into grasp trajectories and pretrain the low-level policy, which we fine-tune with data from the downstream task. </p>
+		<p style="width:75%; text-align: justify; white-space: normal;"> An overview of our approach. Our method integrates large-scale grasp pretraining with a hierarchical policy framework. (a) A high-level sub-goal prediction policy takes the current point cloud observation as input and predicts the positions of hand key points. (b) A low-level policy is conditioned on predicted sub-goal key points and current observation and predicts action chunks for the controller. Top: We augment the <a href="https://pku-epic.github.io/Dexonomy/">Dexonomy</a> dataset into grasp trajectories and pretrain the low-level policy, which we fine-tune with data from the downstream task. </p>
 	</center>
 
   <center>
@@ -262,7 +262,7 @@
     <h2>Visualization of G2D-Pretrain Dataset</h2>
     <div class="content-div"></div>
 
-    <p style="width:75%; text-align: justify; white-space: normal;"> We construct <code>G2D-Pretrain</code>, a large-scale dataset of 355k grasp trajectories by augmenting grasp annotations from Dexonomy.</p>
+    <p style="width:75%; text-align: justify; white-space: normal;"> We construct <code>G2D-Pretrain</code>, a large-scale dataset of 355k grasp trajectories by augmenting grasp annotations from <a href="https://pku-epic.github.io/Dexonomy/">Dexonomy</a>.</p>
 
     <video
       playsinline
