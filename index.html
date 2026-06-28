@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title> From Grasps to Dexterity </title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+	<style>
+      .header {
+        width: auto;
+        padding-top: 4rem;
+        padding-bottom: 2rem;
+      }
+
+      a:link,a:visited
+      {
+        color: #0071bc;
+        text-decoration: none;
+      }
+
+      a:hover {
+        color: #208799;
+      }
+
+      .section-div {height: 3em}
+      .content-div {height: 1em}
+
+      .no-gutters {
+	      margin-right: 0;
+	      margin-left: 0;
+      }
+
+	  .btn {
+	      margin-left: 0.2rem;
+	  	  margin-right: 0.2rem;
+	  }
+
+	</style>
+
+  <style>
+  .video-grid {
+    width: 90%;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+  }
+
+  .video-card {
+    text-align: center;
+  }
+
+  .video-card video {
+    width: 100%;
+    border-radius: 10px;
+  }
+
+  .video-card p {
+    margin-top: 6px;
+    font-weight: 500;
+  }
+
+  /* On small screens, switch to 1 or 2 columns */
+  @media (max-width: 900px) {
+    .video-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 600px) {
+    .video-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+  </style>
+
+  <style>
+  .video-grid-2x2 {
+    width: 99%;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+
+  .video-grid-2x2 video {
+    width: 100%;
+    border-radius: 10px;
+  }
+
+  @media (max-width: 700px) {
+    .video-grid-2x2 {
+      grid-template-columns: 1fr;
+    }
+  }
+  </style>
+  <style>
+  .vis-video-row {
+    width: 90%;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+    align-items: stretch;
+  }
+
+  #rerun-viewer-1,
+  #rerun-viewer-2 {
+    width: 100%;
+    height: 400px;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid #ddd;
+  }
+
+  .side-video video {
+    width: 100%;
+    height: 400px;
+    object-fit: contain;
+    background: black;
+    border-radius: 10px;
+  }
+
+  @media (max-width: 900px) {
+    .vis-video-row {
+      grid-template-columns: 1fr;
+    }
+  }
+  </style>
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <script type="module" crossorigin src="/assets/index-CtXKfecf.js"></script>
+  <link rel="stylesheet" crossorigin href="/assets/index-DNBYn_Nw.css">
+</head>
+
+<div class="header">
+	<center><h1>From Grasps to Dexterity: </h1></center>
+  <center><h2>Large-Scale Grasp Pretraining for Dexterous Manipulation</h2></center>
+	<div class="content-div"></div>
+	<center>
+		<a href="https://yingyuan0414.github.io/" target="_blank" style="font-size:18px">Ying Yuan</a><sup style="font-size:12px">*</sup>,
+		<a href="https://www.linkedin.com/in/xinyu-zoey-liu/" target="_blank" style="font-size:18px">Xinyu Liu</a><sup style="font-size:12px">*</sup>,
+		<a href="https://sriramsk1999.github.io/" target="_blank" style="font-size:18px">Sriram Krishna</a>,
+		<a href="https://davheld.github.io/" target="_blank" style="font-size:18px">David Held</a></br>
+	</center>
+
+	<center>
+		<sup style="font-size:12px">*</sup> Equal Contribution
+	</center>
+
+	<div class="content-div"></div>
+	<center>
+		Carnegie Mellon University
+	</center>
+
+	<!-- <div class="content-div"></div>
+	<center>
+		<p style="font-size:18px">Conference on Robot Learning (CoRL), 2024</p>
+	</center> -->
+
+	<div class="content-div"></div>
+	<center>
+		<div class="btn-group" role="group">
+
+			<a href="https://yingyuan0414.github.io/grasp2dexterity" target="_blank">
+				<button type="button" class="btn btn-dark"><span class="icon">
+          <i class="fa-solid fa-file-pdf"></i> Paper
+				</span></button>
+			</a>
+
+			<a href="https://yingyuan0414.github.io/grasp2dexterity" target="_blank">
+				<button type="button" class="btn btn-dark"><span class="icon">
+          <i class="fa-brands fa-github"></i> Code
+				</span></button>
+			</a>
+
+<!--			<a href="">-->
+<!--				<button type="button" class="btn btn-dark"><span class="icon">-->
+<!--					<i class="fab fa-youtube"></i> Video-->
+<!--				</span></button>-->
+<!--			</a>-->
+
+			<a href="https://yingyuan0414.github.io/grasp2dexterity">
+				<button type="button" class="btn btn-dark"><span class="icon">
+          <i class="fa-brands fa-twitter"></i> Twitter
+				</span></button>
+        	</a>
+
+		</div>
+	</center>
+
+	
+</div>
+
+<div class="container">
+<center>
+  <div class="content-div"></div>
+
+  <iframe
+    width="75%"
+    height="450"
+    src="https://www.youtube.com/embed/GqHDTBegLZQ"
+    title="YouTube video player"
+    frameborder="0"
+    referrerpolicy="strict-origin-when-cross-origin"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+    allowfullscreen
+    style="margin-bottom: 30px;">
+  </iframe>
+  <!-- <iframe width="560" height="315" src="https://www.youtube.com/embed/GqHDTBegLZQ?si=-s8tXyiO-al2llwT" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe> -->
+</center>
+	<!--------------------- abstract --------------------->
+	<center>
+		<h2> Abstract </h2>
+		<div class="content-div"></div>
+		<p style="width:75%; text-align: justify; white-space: normal;"> Large-scale dexterous grasp datasets encode rich priors over hand-object interaction, but their use has largely been confined to grasp generation and pick-and-place manipulation. We study whether such data can instead support functional dexterity in articulated tool use, where a robot must acquire a tool, maintain contact, and operate its functional moving parts. We adapt a hierarchical imitation learning framework that combines high-level hand sub-goal prediction with a low-level goal-conditioned controller. We construct a 355k-trajectory grasp-pretraining dataset from large-scale dexterous grasp annotations and use it to pretrain the low-level controller. The controller is then fine-tuned on downstream task demonstrations. To evaluate this setting, we introduce <code>DexCraft</code>, a simulation benchmark with six articulated tool-use tasks requiring coordinated finger motion. Across simulation and real-world experiments, our approach outperforms end-to-end diffusion policy baselines and hierarchical policies trained from scratch. In the real world, it improves full-task success by 33.3 percentage points over DP3. These results show that grasp datasets can serve not only as resources for grasp synthesis, but also as scalable pretraining data for contact-rich dexterous manipulation. </p>
+	</center>
+
+	<div class="content-div"></div>
+
+	<center>
+		<h2> DexCraft Benchmark </h2>
+    <p style="width:75%; text-align: justify; white-space: normal;">
+      We propose the <code>DexCraft</code> benchmark which contains six dexterous manipulation tasks. The robot hand is required to grasp the object, lift it to the target pose, and trigger the object's articulated joint.
+      We collect 5 demonstrations with human teleoperation and use <a href="https://mimicgen.github.io/">MimicGen</a> pipeline to augment to 100 demos.
+    </p>
+	</center>
+	<div class="content-div"></div>
+
+  <div class="video-grid">
+    <div class="video-card">
+      <video playsinline autoplay loop muted controls preload="metadata" src="/assets/spraybottle-BGub_3j3.mp4" onloadedmetadata="this.playbackRate = 2.0"></video>
+      <p>Spray Bottle</p>
+    </div>
+
+    <div class="video-card">
+      <video playsinline autoplay loop muted controls preload="metadata" src="/assets/lighter-C0S21-ll.mp4" onloadedmetadata="this.playbackRate = 2.0"></video>
+      <p>Lighter</p>
+    </div>
+
+    <div class="video-card">
+      <video playsinline autoplay loop muted controls preload="metadata" src="/assets/dispenser-BGHOq72_.mp4" onloadedmetadata="this.playbackRate = 2.0"></video>
+      <p>Dispenser</p>
+    </div>
+
+    <div class="video-card">
+      <video playsinline autoplay loop muted controls preload="metadata" src="/assets/pliers-RJQmaMVp.mp4" onloadedmetadata="this.playbackRate = 2.0"></video>
+      <p>Pliers</p>
+    </div>
+
+    <div class="video-card">
+      <video playsinline autoplay loop muted controls preload="metadata" src="/assets/stapler-D8KAUDZ-.mp4" onloadedmetadata="this.playbackRate = 2.0"></video>
+      <p>Stapler</p>
+    </div>
+
+    <div class="video-card">
+      <video playsinline autoplay loop muted controls preload="metadata" src="/assets/pen-D6RmPcpz.mp4" onloadedmetadata="this.playbackRate = 2.0"></video>
+      <p>Pen</p>
+    </div>
+  </div>
+
+	<center>
+		<div class="section-div"></div>
+		<h2> Real World Results (8x) </h2>
+
+    <h4> Syringe </h4>
+
+    <div class="video-grid">
+      <div class="video-card">
+        <video playsinline autoplay loop muted controls preload="metadata" src="/assets/syringe_success_1-f-HRrIzt.mp4"></video>
+      </div>
+      <div class="video-card">
+        <video playsinline autoplay loop muted controls preload="metadata" src="/assets/syringe_success_3-Dqr0j8RC.mp4"></video>
+      </div>
+      <div class="video-card">
+        <video playsinline autoplay loop muted controls preload="metadata" src="/assets/syringe_success_4-C_TPvAfd.mp4"></video>
+      </div>
+    </div>
+
+    <h4> Spray Bottle </h4>
+
+    <div class="video-grid">
+      <div class="video-card">
+        <video playsinline autoplay loop muted controls preload="metadata" src="/assets/spraybottle_success_1-BOsDrl93.mp4"></video>
+      </div>
+      <div class="video-card">
+        <video playsinline autoplay loop muted controls preload="metadata" src="/assets/spraybottle_success_2-B5B_lm8Q.mp4"></video>
+      </div>
+      <div class="video-card">
+        <video playsinline autoplay loop muted controls preload="metadata" src="/assets/spraybottle_success_3-BAbEdr74.mp4"></video>
+      </div>
+    </div>
+
+    <h4> Scissors </h4>
+
+    <div class="video-grid">
+      <div class="video-card">
+        <video playsinline autoplay loop muted controls preload="metadata" src="/assets/scissors_success_1-BUCSf1xz.mp4"></video>
+      </div>
+      <div class="video-card">
+        <video playsinline autoplay loop muted controls preload="metadata" src="/assets/scissors_success_2-D7pQGgi5.mp4"></video>
+      </div>
+      <div class="video-card">
+        <video playsinline autoplay loop muted controls preload="metadata" src="/assets/scissors_success_3-B-dPwYSb.mp4"></video>
+      </div>
+    </div>
+	
+	</center>
+
+	<center>
+		<div class="section-div"></div>
+		<h2> How did we achieve this? </h2>
+		<div class="content-div"></div>
+		<img class="img-fluid" src="/assets/method-CqzAbjjh.png" style="margin-bottom: 30px" width="75%" alt=""><br>
+
+		<p style="width:75%; text-align: justify; white-space: normal;"> An overview of our approach. Our method integrates large-scale grasp pretraining with a hierarchical policy framework. (a) A high-level sub-goal prediction policy takes the current point cloud observation as input and predicts the positions of hand key points. (b) A low-level policy is conditioned on predicted sub-goal key points and current observation and predicts action chunks for the controller. Top: We augment the <a href="https://pku-epic.github.io/Dexonomy/">Dexonomy</a> dataset into grasp trajectories and pretrain the low-level policy, which we fine-tune with data from the downstream task. </p>
+	</center>
+
+  <center>
+    <div class="section-div"></div>
+    <h2>Visualization of G2D-Pretrain Dataset</h2>
+    <div class="content-div"></div>
+
+    <p style="width:75%; text-align: justify; white-space: normal;"> We construct <code>G2D-Pretrain</code>, a large-scale dataset of 355k grasp trajectories by augmenting grasp annotations from <a href="https://pku-epic.github.io/Dexonomy/">Dexonomy</a>.</p>
+
+    <video
+      playsinline
+      autoplay
+      loop
+      muted
+      controls
+      preload="metadata"
+      src="/assets/pretrain_grid-BQeGxmY-.mp4"
+      width="75%"
+      style="border-radius:10px;">
+    </video>
+  </center>
+
+  <center>
+    <div class="section-div"></div>
+    <h2>High-level Prediction During Real-World Deployment</h2>
+    <div class="content-div"></div>
+  </center>
+
+  <div style="height: 1em;"></div>
+
+  <center>
+    <p style="width:75%; text-align: justify; white-space: normal;"> The following is a visualization of high-level policy prediction during real-world rollouts. <span style="color: red;">Red points</span> are goal hand points, <span style="color: blue;">blue points</span> are current hand points, and <span style="color: grey;">grey points</span> are scene points.  </p>
+  </center>
+
+  <div style="height: 1em;"></div>
+
+  <div class="vis-video-row">
+    <div id="rerun-viewer-1"></div>
+
+    <div class="side-video">
+      <video
+        playsinline
+        autoplay
+        loop
+        muted
+        controls
+        preload="metadata"
+        src="/assets/vis_scissors-D_vUeMzH.mp4">
+      </video>
+    </div>
+  </div>
+
+  <div class="vis-video-row">
+    <div id="rerun-viewer-2"></div>
+
+    <div class="side-video">
+      <video
+        playsinline
+        autoplay
+        loop
+        muted
+        controls
+        preload="metadata"
+        src="/assets/vis_syringe-B62r7M9s.mp4">
+      </video>
+    </div>
+  </div>
+
+
+
+	<div class="section-div"></div>
+	<center>
+	<h2> Qualitative Comparison in Simulation Tasks </h2>
+	</center>
+
+  <div style="height: 1em;"></div>
+
+  <center>
+    <h5> DP3 </h5>
+    Unstable grasp due to imprecise hand-object alignment. <br>
+  </center>
+
+  <div style="height: 1em;"></div>
+
+  <div class="video-grid">
+    <div class="video-card">
+      <video playsinline autoplay loop muted controls preload="metadata" src="/assets/spraybottle_none_2-w7EnxUko.mp4" onloadedmetadata="this.playbackRate = 2.0"></video>
+      Failure
+    </div>
+    <div class="video-card">
+      <video playsinline autoplay loop muted controls preload="metadata" src="/assets/spraybottle_none_3-CLxdycJM.mp4" onloadedmetadata="this.playbackRate = 2.0"></video>
+      Failure
+    </div>
+    <div class="video-card">
+      <video playsinline autoplay loop muted controls preload="metadata" src="/assets/spraybottle_none_4-C3rNpqaA.mp4" onloadedmetadata="this.playbackRate = 2.0"></video>
+      Failure
+    </div>
+  </div>
+
+  <div style="height: 2em;"></div>
+
+  <center>
+    <h5> Hierarchical Policy from Scratch </h5>
+    Higher success rate than end-to-end policy, but still imperfect grasp in some cases. <br>
+  </center>
+
+  <div style="height: 1em;"></div>
+
+  <div class="video-grid">
+    <div class="video-card">
+      <video playsinline autoplay loop muted controls preload="metadata" src="/assets/spraybottle_goal_2-B-KUTNw-.mp4"></video>
+      Success
+    </div>
+    <div class="video-card">
+      <video playsinline autoplay loop muted controls preload="metadata" src="/assets/spraybottle_goal_3-zezAe02g.mp4"></video>
+      Success
+    </div>
+    <div class="video-card">
+      <video playsinline autoplay loop muted controls preload="metadata" src="/assets/spraybottle_goal_4-qkVa_0Ji.mp4"></video>
+      Failure
+    </div>
+  </div>
+
+  <div style="height: 2em;"></div>
+
+  <center>
+    <h5> Our Method </h5>
+    Much more robust than baselines. <br>
+  </center>
+
+  <div style="height: 1em;"></div>
+
+  <div class="video-grid">
+    <div class="video-card">
+      <video playsinline autoplay loop muted controls preload="metadata" src="/assets/spraybottle_finetune_2-B9yPcNH7.mp4"></video>
+      Success
+    </div>
+    <div class="video-card">
+      <video playsinline autoplay loop muted controls preload="metadata" src="/assets/spraybottle_finetune_3-B7I24h1x.mp4"></video>
+      Success
+    </div>
+    <div class="video-card">
+      <video playsinline autoplay loop muted controls preload="metadata" src="/assets/spraybottle_finetune_4-BU74n1AL.mp4"></video>
+      Success
+    </div>
+  </div>
+	
+
+
+	<div class="section-div"></div>
+	<center>
+	<h2> Failure Cases (Baselines, 8x) </h2>
+	</center>
+
+  <div style="height: 1em;"></div>
+
+  <center>
+    <h5> DP3 </h5>
+    Grasp failure due to imprecise hand-object alignment. <br>
+  </center>
+
+  <div style="height: 1em;"></div>
+
+  <div class="video-grid">
+    <div class="video-card">
+      <video playsinline autoplay loop muted controls preload="metadata" src="/assets/baseline_imprecise_syringe-C762WcVR.mp4"></video>
+    </div>
+    <div class="video-card">
+      <video playsinline autoplay loop muted controls preload="metadata" src="/assets/baseline_imprecise_spraybottle-C_O5EbYj.mp4"></video>
+    </div>
+    <div class="video-card">
+      <video playsinline autoplay loop muted controls preload="metadata" src="/assets/baseline_imprecise_scissors-D0JmwUW2.mp4"></video>
+    </div>
+  </div>
+
+  <div style="height: 1em;"></div>
+
+  <center>
+    <h5> Hierarchical Policy from Scratch </h5>
+    Unstable grasp or failure in triggering the articulated component. <br>
+  </center>
+
+  <div style="height: 1em;"></div>
+
+  <div class="video-grid">
+    <div class="video-card">
+      <video playsinline autoplay loop muted controls preload="metadata" src="/assets/baseline_not_push_syringe-C2ESx-kJ.mp4"></video>
+    </div>
+    <div class="video-card">
+      <video playsinline autoplay loop muted controls preload="metadata" src="/assets/baseline_not_push_spraybottle-CIbNpoHm.mp4"></video>
+    </div>
+    <div class="video-card">
+      <video playsinline autoplay loop muted controls preload="metadata" src="/assets/baseline_not_push_scissors-yGGcrdvk.mp4"></video>
+    </div>
+  </div>
+
+
+	<div class="section-div"></div>
+	<center>
+	<h2> Failure Cases (Our Method, 8x) </h2>
+	</center>
+  <div style="height: 1em;"></div>
+	<div class="video-grid">
+    <div class="video-card">
+      Extra padding on the hand pushes <br>
+      down the plunger before grasping.
+      <div style="height: 1em;"></div>
+      <video playsinline autoplay loop muted controls preload="metadata" src="/assets/ours_failure_syringe-D_GGDOnS.mp4"></video>
+    </div>
+    <div class="video-card">
+      Excessive approach velocity <br>
+      knocks the object over.
+      <div style="height: 1em;"></div>
+      <video playsinline autoplay loop muted controls preload="metadata" src="/assets/ours_failure_spraybottle-BAdkbgzI.mp4"></video>
+    </div>
+    <div class="video-card">
+      Out-of-distribution grasp position <br>
+      leads to an unstable grasp.
+      <div style="height: 1em;"></div>
+      <video playsinline autoplay loop muted controls preload="metadata" src="/assets/ours_failure_scissors-zMn9TDDA.mp4"></video>
+    </div>
+  </div>
+
+
+	<div class="section-div"></div>
+
+	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	<!-- Include all compiled plugins (below), or include individual files as needed -->
+	<script src="res/js/bootstrap.min.js"></script>
+</div>
+
+</html>
